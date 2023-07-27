@@ -1,0 +1,5 @@
+/target
+/temp
+docker-web-server.log
+.idea
+/logs
