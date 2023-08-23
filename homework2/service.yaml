@@ -1,0 +1,12 @@
+# поменять, на просто v1 если не запустится
+apiVersion: apps/v1
+kind: Service
+metadata:
+  name: health-project-service
+spec:
+  selector:
+    app: health-project
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8000

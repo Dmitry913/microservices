@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: health-project-deployment
+spec:
+  replicas: 2
+  selector:
+    mathLabels:
+      app: health-project
+  template:
+    metadata:
+      labels:
+        app: health-project
+    spec:
+      containers:
+        - name: health-project
+          imagePullPolice: IfNotPresent
+          env:
+            - name: HOST_CONTAINER
+              value: "172.17.0.2"
+          image: dmitry1031/webserver:1.0
+          ports:
+          - containerPort: 8000
+# TODO добавить readness liveness пробы

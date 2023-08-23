@@ -16,7 +16,8 @@ public class Server {
         // наконец-то мне удалось раскусить, на какой ip-адрес внутри контейнера попадают запросы:)
         // фактически при отправке запроса в локальной сети по определённому порту, его обрабатывает дочерний процесс, который слушает этот порт,
         // далее запрос переадресуется на хост = префиксу идентификатора контейнера (он через ДНС всегда маппится в данный айпи адрес - 172.17.0.2)
-        HttpServer server = HttpServer.create(new InetSocketAddress("172.17.0.2", 8000), 10);
+        String ipAddress = System.getenv().get("HOST_CONTAINER");
+        HttpServer server = HttpServer.create(new InetSocketAddress(ipAddress, 8000), 10);
         server.createContext("/health", createHealthHandler());
         server.start();
     }

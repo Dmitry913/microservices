@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: cluster-ingress
+#  annotations:
+#    nginx.ingress.kubernetes.io/rewrite-target: \
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: arch.homework
+      http:
+        paths:
+          - path: /health
+            pathType: Prefix
+            backend:
+              service:
+                name: health-project-service
+                port:
+                  number: 80
+# TODO добавить поддержку TLS
